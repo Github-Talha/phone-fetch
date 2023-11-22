@@ -21,12 +21,20 @@
             <input id="search-input-field" type="text" placeholder="search"
                 class="input input-bordered w-full max-w-xs my-5" />
             <!-- search button  -->
-            <button onclick="handleSearch()" class="btn btn-accent my-5 text-white">Search</button>
+            <button onclick="handleSearch()" class="btn btn-accent my-5 ml-1 text-white">Search</button>
         </section>
+
         <!-- search result  -->
         <section class="container mx-auto">
-            <div id="phones-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- spinner or loader  -->
+            <div id="loading-spinner" class="text-center hidden mt-48">
+                <span class="loading loading-ring loading-lg"></span>
+            </div>
 
+            <div id="phones-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            </div>
+            <div class="flex justify-center">
+                <button id="show-button" class="btn btn-accent text-white hidden my-5">Show All</button>
             </div>
         </section>
     </main>
