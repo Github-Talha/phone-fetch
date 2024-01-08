@@ -6,13 +6,22 @@ function loadData(search) {
 }
 //display the API data
 function displayData(phones) {
+  const notAvailableImg = document.getElementById('not-available-image');
+  if (phones.length < 1) {
+    notAvailableImg.classList.remove('hidden')
+  }
+  else {
+    notAvailableImg.classList.add('hidden')
+  }
   // get phone container
   const phoneContainer = document.getElementById("phone-container");
+  //   clear before content
+  phoneContainer.textContent = "";
   //get each phone from phones
   phones.forEach((phone) => {
     //   create a div
     const div = document.createElement("div");
-    div.classList = `card w-96`;
+    div.classList = `card w-96 p-5 w-[90%] flex flex-col items-center border rounded-lg bg-[#eef1f5]`;
     // set the API values into a card
     div.innerHTML = `
         <img src="${phone.image}">
@@ -21,15 +30,8 @@ function displayData(phones) {
         `;
     //append the created div into the phone container
     phoneContainer.appendChild(div);
-    //style the div
-    div.style.padding = "20px";
-    div.style.width = "90%";
-    div.style.display = "flex";
-    div.style.flexDirection = "column";
-    div.style.alignItems = "center";
-    div.style.border = "2px solid #ccc";
-    div.style.borderRadius = "10px";
   });
+  toggleLoadingSpinner(false)
 }
 
 // search handler
@@ -38,8 +40,20 @@ const handleSearch = () => {
   const inputValue = document.getElementById("inputField");
 
   const value = inputValue.value;
+  toggleLoadingSpinner(true)
   //call the main function
   loadData(value);
 
   inputValue.value = "";
 };
+
+// loading spinner 
+const toggleLoadingSpinner = (condition) => {
+  const loadingSpinner = document.getElementById('loading-spinner');
+  if (condition) {
+    loadingSpinner.classList.remove('hidden')
+  }
+  else {
+    loadingSpinner.classList.add('hidden')
+  }
+}
